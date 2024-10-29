@@ -14,7 +14,7 @@ import io.flutter.plugin.common.EventChannel;
 public class IntentResponseService implements EventChannel.StreamHandler {
     // To store the event sink whenever flutter starts listenting
     EventChannel.EventSink events;
-    private static final String TAG = "FlutterIntent";
+    private static final String TAG = "UPIConnect";
 
     @Override
     public void onListen(Object arguments, EventChannel.EventSink events) {

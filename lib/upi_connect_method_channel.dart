@@ -13,7 +13,7 @@ import 'upi_connect_platform_interface.dart';
 class MethodChannelUpiConnect extends UpiConnectPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('com.cs.upi_connect/upi_intent');
+  final methodChannel = const MethodChannel('com.cs.upi_connect/intent');
   final String methodName = "upi_intent";
   final String upiAppsMethodName = "get_all_upi_apps";
 

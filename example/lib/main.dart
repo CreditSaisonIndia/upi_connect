@@ -25,9 +25,9 @@ class _MyAppState extends State<MyApp> {
 
   final TextEditingController _receiverUpiId = TextEditingController();
   final TextEditingController _amountController =
-  TextEditingController(text: "50");
+      TextEditingController(text: "50");
   final TextEditingController _transactionNotesController =
-  TextEditingController(text: "Test Transaction");
+      TextEditingController(text: "Test Transaction");
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   _fetchUPIApps() async {
-    upiApps = await UpiConnect.getAll();
+    upiApps = await UpiConnect.getAllApps();
     setState(() {});
   }
 
@@ -70,8 +70,8 @@ class _MyAppState extends State<MyApp> {
     return InkWell(
       onTap: isFormValid
           ? () {
-        _makePayment(upiApp: upiApp);
-      }
+              _makePayment(upiApp: upiApp);
+            }
           : null,
       child: Column(
         children: [
@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('UPI'),
+          title: const Text('UPI Connect'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -129,6 +129,12 @@ class _MyAppState extends State<MyApp> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      const Text("Execute UPI transaction using Intent URL"),
+                      _verticalSpacer(),
+                      _makePaymentUsingIntent(),
+                      _verticalSpacer(),
+                      const Text("or Enter the UPI details in UPI Form"),
+                      _verticalSpacer(),
                       _upiForm(),
                       _verticalSpacer(),
                       const Text("or Select UPI app to pay"),
@@ -156,7 +162,6 @@ class _MyAppState extends State<MyApp> {
   Widget _upiForm() {
     return Column(
       children: [
-        const Text("UPI Form"),
         _receiverUpiIdField(),
         TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -192,6 +197,14 @@ class _MyAppState extends State<MyApp> {
           isEnabled: isFormValid,
         ),
       ],
+    );
+  }
+
+  Widget _makePaymentUsingIntent() {
+    return _button(
+      text: "Make Payment using Intent",
+      onTap: _makeUrlPayment,
+      isEnabled: true,
     );
   }
 
@@ -233,6 +246,18 @@ class _MyAppState extends State<MyApp> {
       receiverUpiId: _receiverUpiId.text,
       transactionId: "1234567890",
       transactionNote: _transactionNotesController.text,
+      onResponse: (UPITransactionResponse response) {
+        _onResult(response.toString());
+      },
+      upiApp: upiApp,
+    );
+    upiTransaction.initiate();
+  }
+
+  _makeUrlPayment({UPIApp? upiApp}) {
+    UPITransaction upiTransaction = UPITransaction.fromUrl(
+      upiUrl:
+          "upi://pay?pa=test@ybl&pn=test&am=1.00&tr=1210374251828217008&tn=Getupiapps&cu=INR&mode=04",
       onResponse: (UPITransactionResponse response) {
         _onResult(response.toString());
       },

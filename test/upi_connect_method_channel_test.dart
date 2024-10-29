@@ -1,11 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:upi_connect/upi_connect_method_channel.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelUpiConnect platform = MethodChannelUpiConnect();
+  // MethodChannelUpiConnect platform = MethodChannelUpiConnect();
   const MethodChannel channel = MethodChannel('upi_connect');
 
   setUp(() {

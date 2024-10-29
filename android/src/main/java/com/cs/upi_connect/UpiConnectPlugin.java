@@ -56,7 +56,7 @@ public class UpiConnectPlugin implements FlutterPlugin, MethodCallHandler,Activi
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    methodChannel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), _channelName+"/upi_intent");
+    methodChannel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), _channelName+"/intent");
     eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(),_channelName+"/upi_intent_response");
 
     methodChannel.setMethodCallHandler(this);
@@ -88,7 +88,7 @@ public class UpiConnectPlugin implements FlutterPlugin, MethodCallHandler,Activi
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     this.result = result;
     switch (call.method){
-      case "flutter_intent":
+      case "upi_intent":
         handleIntent(call, result);
         break;
       case "get_all_upi_apps":
@@ -175,40 +175,12 @@ public class UpiConnectPlugin implements FlutterPlugin, MethodCallHandler,Activi
       Map<String, Object> extras = call.argument("extras");
 
       Intent intent = new Intent(intentAction);
-      intent.setPackage(packageName);
+      if (packageName!=null && !packageName.isEmpty()){
+        intent.setPackage(packageName);
+      }
 
       if (intentURL != null && !intentURL.isEmpty()) {
         intent.setData(Uri.parse(intentURL));
-      }
-
-      if (extras != null) {
-        for (Map.Entry<String, Object> entry : extras.entrySet()) {
-          String key = entry.getKey();
-          Object value = entry.getValue();
-
-          String typeName = value.getClass().getSimpleName();
-
-          switch (typeName) {
-            case "String":
-              intent.putExtra(key, (String) value);
-              break;
-            case "Integer":
-              intent.putExtra(key, (Integer) value);
-              break;
-            case "Boolean":
-              intent.putExtra(key, (Boolean) value);
-              break;
-            case "Double":
-              intent.putExtra(key, (Double) value);
-              break;
-            case "Float":
-              intent.putExtra(key, (Float) value);
-              break;
-            case "Long":
-              intent.putExtra(key, (Long) value);
-              break;
-          }
-        }
       }
 
       Map<String, Object> resultMap = new HashMap<>();
@@ -247,19 +219,19 @@ public class UpiConnectPlugin implements FlutterPlugin, MethodCallHandler,Activi
   public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
     Log.d(TAG, "onActivityResult: requestCode = " + requestCode + " result code = " + resultCode);
 
-    if (data != null) {
-      Log.d(TAG, "onActivityResult: intent data = " + data.toString());
+   if (data != null) {
+     Log.d(TAG, "onActivityResult: intent data = " + data.toString());
 
-      Bundle extras = data.getExtras();
-      if (extras != null) {
-        Log.d(TAG, "onActivityResult: intent extra = " + data.getExtras().toString());
-      }
+     Bundle extras = data.getExtras();
+     if (extras != null) {
+       Log.d(TAG, "onActivityResult: intent extra = " + data.getExtras().toString());
+     }
 
-      Uri uri = data.getData();
-      if (uri != null) {
-        Log.d(TAG, "onActivityResult: intent data = " + uri.toString());
-      }
-    }
+     Uri uri = data.getData();
+     if (uri != null) {
+       Log.d(TAG, "onActivityResult: intent data = " + uri.toString());
+     }
+   }
     intentResponseService.send(requestCode,resultCode,data);
     return false;
   }

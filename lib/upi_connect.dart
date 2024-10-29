@@ -7,7 +7,7 @@ export 'package:upi_connect/model/upi_transaction_response.dart';
 export 'package:upi_connect/upi_connect_platform_interface.dart';
 
 class UpiConnect {
-  static Future<List<UPIApp>> getAll() async {
+  static Future<List<UPIApp>> getAllApps() async {
     return MethodChannelUpiConnect().getAllUpiApps();
   }
 }

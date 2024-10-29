@@ -24,12 +24,13 @@ class UPITransaction {
     this.upiApp,
   }) {
     upiUrl =
-    "upi://pay?pa=$receiverUpiId&pn=$receiverName&tr=$transactionId&tn=$transactionNote&am=$amount&mc=0000&mode=02&cu=INR";
+        "upi://pay?pa=$receiverUpiId&pn=$receiverName&tr=$transactionId&tn=$transactionNote&am=$amount&mc=0000&mode=02&cu=INR";
   }
 
-  UPITransaction.fromQRScanner({
+  UPITransaction.fromUrl({
     required this.upiUrl,
     required this.onResponse,
+    this.upiApp,
   });
 
   Future<dynamic> initiate({Function(dynamic)? onResultCallBack}) {
