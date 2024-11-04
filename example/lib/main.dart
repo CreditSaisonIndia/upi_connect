@@ -239,7 +239,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  _makePayment({UPIApp? upiApp}) {
+  _makePayment({UPIApp? upiApp}) async {
     UPITransaction upiTransaction = UPITransaction(
       amount: double.parse(_amountController.text),
       receiverName: "TestUser",
@@ -251,10 +251,10 @@ class _MyAppState extends State<MyApp> {
       },
       upiApp: upiApp,
     );
-    upiTransaction.initiate();
+    dynamic response = await upiTransaction.initiate();
   }
 
-  _makeUrlPayment({UPIApp? upiApp}) {
+  _makeUrlPayment({UPIApp? upiApp}) async {
     UPITransaction upiTransaction = UPITransaction.fromUrl(
       upiUrl:
           "upi://pay?pa=test@ybl&pn=test&am=1.00&tr=1210374251828217008&tn=Getupiapps&cu=INR&mode=04",
@@ -263,6 +263,6 @@ class _MyAppState extends State<MyApp> {
       },
       upiApp: upiApp,
     );
-    upiTransaction.initiate();
+    dynamic response = await upiTransaction.initiate();
   }
 }

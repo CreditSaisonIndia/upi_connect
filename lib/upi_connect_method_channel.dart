@@ -77,7 +77,7 @@ class MethodChannelUpiConnect extends UpiConnectPlatform {
   }
 
   @override
-  Future initiateTransaction({
+  Future<dynamic> initiateTransaction({
     required UPITransaction upiTransaction,
   }) async {
     return await launchIntent(
