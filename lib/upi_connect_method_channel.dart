@@ -24,7 +24,7 @@ class MethodChannelUpiConnect extends UpiConnectPlatform {
   StreamSubscription<dynamic>? _intentStatusSubscription;
 
   @override
-  Future<dynamic> launchIntent(
+  Future<Map?> launchIntent(
       {required FlutterIntentWithResult intentDetails,
       Function(dynamic)? onResponse,
       String? packageName}) async {
@@ -77,7 +77,7 @@ class MethodChannelUpiConnect extends UpiConnectPlatform {
   }
 
   @override
-  Future<dynamic> initiateTransaction({
+  Future<Map?> initiateTransaction({
     required UPITransaction upiTransaction,
   }) async {
     return await launchIntent(

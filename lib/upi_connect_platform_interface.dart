@@ -26,8 +26,7 @@ abstract class UpiConnectPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<dynamic> launchIntent(
-      {required FlutterIntentWithResult intentDetails}) {
+  Future<Map?> launchIntent({required FlutterIntentWithResult intentDetails}) {
     throw UnimplementedError('launchIntent() has not been implemented.');
   }
 
@@ -41,4 +40,3 @@ abstract class UpiConnectPlatform extends PlatformInterface {
     throw UnimplementedError('initiateTransaction() has not been implemented.');
   }
 }
-

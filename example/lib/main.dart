@@ -251,7 +251,8 @@ class _MyAppState extends State<MyApp> {
       },
       upiApp: upiApp,
     );
-    dynamic response = await upiTransaction.initiate();
+    Map? response = await upiTransaction.initiate();
+    print(response);
   }
 
   _makeUrlPayment({UPIApp? upiApp}) async {
@@ -263,6 +264,7 @@ class _MyAppState extends State<MyApp> {
       },
       upiApp: upiApp,
     );
-    dynamic response = await upiTransaction.initiate();
+    Map? response = await upiTransaction.initiate();
+    print(response);
   }
 }

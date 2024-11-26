@@ -72,7 +72,8 @@ UPITransaction upiTransaction = UPITransaction.fromUrl(
   },
   upiApp: upiApp,
 );
-upiTransaction.initiate();
+Map? response = await upiTransaction.initiate();
+print(response);
 ```
 
 | Parameter  | Type                               | Description                                       |
@@ -95,7 +96,8 @@ UPITransaction upiTransaction = UPITransaction(
   },
   upiApp: upiApp,
 );
-upiTransaction.initiate();
+Map? response = await upiTransaction.initiate();
+print(response);
 ```
 
 | Parameter       | Type                               | Description                                       |
@@ -107,6 +109,11 @@ upiTransaction.initiate();
 | transactionNote | `String`                           | Optional note for the transaction                 |
 | onResponse      | `Function(UPITransactionResponse)` | Callback that receives the UPITransactionResponse |
 | upiApp          | `UPIApp?`                          | [Optional] UPI app to initiate the transaction    |
+
+The `upiTransaction.initiate()` method returns a `Map?` as the response from the native layer. The response contains a key named `status`, which indicates the result of the transaction initiation:
+
+- **"SUCCESS"**: The transaction was successfully initiated.
+- **"ERROR"**: The transaction initiation failed.
 
 ## API
 

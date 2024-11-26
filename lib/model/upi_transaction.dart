@@ -33,7 +33,7 @@ class UPITransaction {
     this.upiApp,
   });
 
-  Future<dynamic> initiate({Function(dynamic)? onResultCallBack}) {
+  Future<Map?> initiate({Function(dynamic)? onResultCallBack}) {
     return MethodChannelUpiConnect().initiateTransaction(
       upiTransaction: this,
     );

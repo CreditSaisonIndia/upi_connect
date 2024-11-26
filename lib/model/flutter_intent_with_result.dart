@@ -13,7 +13,7 @@ class FlutterIntentWithResult {
     this.extras,
   });
 
-  Future<dynamic> launch({Function(dynamic)? onResultCallBack}) {
+  Future<Map?> launch({Function(dynamic)? onResultCallBack}) {
     return MethodChannelUpiConnect().launchIntent(
       intentDetails: this,
       onResponse: onResultCallBack,
