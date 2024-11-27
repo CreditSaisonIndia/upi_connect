@@ -252,7 +252,9 @@ class _MyAppState extends State<MyApp> {
       upiApp: upiApp,
     );
     Map? response = await upiTransaction.initiate();
-    print(response);
+    if (kDebugMode) {
+      print(response);
+    }
   }
 
   _makeUrlPayment({UPIApp? upiApp}) async {
@@ -265,6 +267,8 @@ class _MyAppState extends State<MyApp> {
       upiApp: upiApp,
     );
     Map? response = await upiTransaction.initiate();
-    print(response);
+    if (kDebugMode) {
+      print(response);
+    }
   }
 }

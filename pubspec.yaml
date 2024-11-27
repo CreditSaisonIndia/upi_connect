@@ -1,7 +1,7 @@
 name: upi_connect
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+repository: https://github.com/CreditSaisonIndia/upi_connect/
 
 environment:
   sdk: ">=3.3.4 <4.0.0"
