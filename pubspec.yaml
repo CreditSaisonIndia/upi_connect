@@ -1,6 +1,6 @@
 name: upi_connect
-description: "A new Flutter project."
-version: 0.0.1
+description: "A Flutter plugin designed to execute UPI transactions seamlessly using intent on Android devices."
+version: 0.0.1-dev.1
 repository: https://github.com/CreditSaisonIndia/upi_connect/
 
 environment:
